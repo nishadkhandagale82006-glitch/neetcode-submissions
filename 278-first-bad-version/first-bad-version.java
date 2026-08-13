@@ -11,7 +11,7 @@ public class Solution extends VersionControl {
             if (isBadVersion(mid)) {// mid is bad then we need to check on the left side L--------m------R  SEE NOW M=IS BAD WE CAN ALSO USE RIGHT = MID 
                 right = mid ;
 
-            } else { // MID IS ON RIGHT SIDE 
+            } else if(! isBadVersion(mid)) { // MID IS ON RIGHT SIDE 
                 left = mid + 1;
             }
         }
