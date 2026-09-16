@@ -11,30 +11,26 @@
 class Solution {
     public ListNode removeNthFromEnd(ListNode head, int n) {
 
-        // create a dummy node 
+        // create a dummy node
+
         ListNode dummy = new ListNode(-1);
-        dummy.next = head;
+        dummy.next = head;  // dummy is pointing to head
 
-        // assign 2 pointers this dummy node 
-        ListNode firstPtr = dummy;
-        ListNode secondPtr = dummy;
+        ListNode first = dummy;
+        ListNode second = dummy;
 
-        // Move secondPtr n space ahead  which is 2 spaces ahead
-        for( int i =0; i<n; i++){
-            secondPtr = secondPtr.next;
+        for( int i=0 ; i<n; i++){  // move the second pointer n times 
+            second = second.next;
         }
 
-        // move both now , until the next of secondptr is null
-
-        while(secondPtr.next != null ) {
-            firstPtr = firstPtr.next;
-            secondPtr = secondPtr.next;
+        while( second.next != null){ // traverse until the second pointer reaches the null
+            first = first.next;
+            second = second.next;
         }
+        // remove the element next to first pointer
 
-        // we now have to remove the node next of firstptr
-        firstPtr.next = firstPtr.next.next;
+        first.next = first.next.next;
+        return dummy.next;  // now we return dummy next it would return whole linkdd list 
 
-        return dummy.next;
-        
     }
 }
