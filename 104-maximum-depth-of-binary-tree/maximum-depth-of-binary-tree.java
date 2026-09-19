@@ -18,6 +18,7 @@ class Solution {
 
         if(root == null) return 0;
 
+        //g o to the left and right of node till the end then come up  using the recursive function
         int left = maxDepth(root.left);
         int right = maxDepth(root.right);
 
