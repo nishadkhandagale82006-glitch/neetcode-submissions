@@ -16,31 +16,20 @@
 class Solution {
 
     public boolean isValidBST(TreeNode root) {
-
-        List<Integer> inorderList = new LinkedList<>();
-
-        helper(root, inorderList);
-
-        for (int i = 1; i < inorderList.size(); i++) {
-
-            if (inorderList.get(i) <= inorderList.get(i - 1)) {
-                return false;
-            }
-        }
-
-        return true;
+        return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
     }
 
-    void helper(TreeNode treeNode, List<Integer> inorderList) {
+    public boolean isValidBST(TreeNode root, long minVal, long maxVal) {
 
-        if (treeNode == null) {
-            return;
+        if (root == null) {
+            return true;
         }
 
-        helper(treeNode.left, inorderList);
+        if (root.val <= minVal || root.val >= maxVal) {
+            return false;
+        }
 
-        inorderList.add(treeNode.val);
-
-        helper(treeNode.right, inorderList);
+        return isValidBST(root.left, minVal, root.val)
+            && isValidBST(root.right, root.val, maxVal);
     }
 }
