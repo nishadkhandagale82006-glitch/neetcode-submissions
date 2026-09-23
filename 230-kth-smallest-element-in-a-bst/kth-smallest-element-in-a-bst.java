@@ -18,33 +18,27 @@ class Solution {
     int count = 0;
 
     public int kthSmallest(TreeNode root, int k) {
+        return inorder(root, k);
+    }
 
-        // Go to the left subtree first
-        if (root.left != null) {
+    private int inorder(TreeNode node, int k) {
 
-            // Call the same method recursively
-            int left = kthSmallest(root.left, k);
+        if (node == null)
+            return -1;
 
-            // If answer was found in left subtree, return it
-            if (left != -1) {
-                return left;
-            }
-        }
+        // 1. Left
+        int left = inorder(node.left, k);
 
-        // Visit current node
+        if (left != -1)
+            return left;
+
+        // 2. Root
         count++;
 
-        // If this is the kth visited node
-        if (count == k) {
-            return root.val;
-        }
+        if (count == k)
+            return node.val;
 
-        // Go to the right subtree
-        if (root.right != null) {
-            return kthSmallest(root.right, k);
-        }
-
-        // Answer not found
-        return -1;
+        // 3. Right
+        return inorder(node.right, k);
     }
 }
